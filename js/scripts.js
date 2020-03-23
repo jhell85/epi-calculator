@@ -51,9 +51,18 @@ $(document).ready(function() {
   })
   $("#equals").click(function() {
     if (operator === "+"){
-      storedNumber = parseFloat(currentNumber) + parseFloat(storedNumber) 
+      currentNumber = parseFloat(currentNumber) + parseFloat(storedNumber) 
+    } else if (operator === "/"){
+      currentNumber = parseFloat(storedNumber) / parseFloat(currentNumber) 
+    } else if (operator === "-"){
+      currentNumber = parseFloat(storedNumber) - parseFloat(currentNumber)
+    } else if (operator === "*"){
+      currentNumber = parseFloat(storedNumber) * parseFloat(currentNumber)
     }
-    return storedNumber;
+    updateDisplay();
+    storedNumber = currentNumber;
+    currentNumber = "";
+
   })
   //--------------------business logic-----------------------
   $("#addition").click(function() {
