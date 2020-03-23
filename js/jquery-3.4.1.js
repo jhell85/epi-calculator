@@ -1,4 +1,3 @@
-var add = function(number1, number2) {
 /*!
  * jQuery JavaScript Library v3.4.1
  * https://jquery.com/
@@ -10597,15 +10596,3 @@ if ( !noGlobal ) {
 
 return jQuery;
 } );
-
-
-
-
-
-
-
-
-
-
-
-
