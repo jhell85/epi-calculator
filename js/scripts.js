@@ -32,7 +32,7 @@ $(document).ready(function() {
   })
   $("#equals").click(function() {
     console.log(currentNumber);
-    
+    currentNumber = "";
   })
 
 });
