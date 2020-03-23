@@ -1,10 +1,15 @@
 $(document).ready(function() {
   let currentNumber = ""
+  let updateDisplay = function(){
+    $("#display").replaceWith(`<h3 id="display">${currentNumber}<h3>`)
+  }
   $("#1").click(function() {
     currentNumber += "1"
+    updateDisplay()
   })
   $("#2").click(function() {
     currentNumber += "2"
+    updateDisplay()
   })
   $("#3").click(function() {
     currentNumber += "3"
@@ -34,6 +39,6 @@ $(document).ready(function() {
     console.log(currentNumber);
     currentNumber = "";
   })
-
+  
 });
   
