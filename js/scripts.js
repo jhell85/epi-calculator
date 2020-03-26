@@ -1,48 +1,60 @@
 $(document).ready(function() {
-  let currentNumber = ""
-  let storedNumber = ""
+  let currentNumber = 0
+  let storedNumber = 0
   let operator = ""
+  let EqualsCheck = false 
+  let checkIfZero = function(value){
+    if (currentNumber === 0 || currentNumber === ""){
+      currentNumber = value;
+    } else {
+      currentNumber += value;
+    }
+  }
   let updateDisplay = function(){
-    $("#display").replaceWith(`<h3 id="display">${currentNumber}<h3>`)
+    if (storedNumber === NaN || storedNumber === 0) {
+      $("#display").replaceWith(`<h3 id="display">${currentNumber}<h3>`)
+    }else{
+      $("#display").replaceWith(`<h3 id="display">${storedNumber} ${operator} ${currentNumber}<h3>`)
+    }
   }
   $("#1").click(function() {
-    currentNumber += "1"
+    checkIfZero("1")
     updateDisplay()
   })
   $("#2").click(function() {
-    currentNumber += "2"
+    checkIfZero("2")
     updateDisplay()
   })
   $("#3").click(function() {
-    currentNumber += "3"
+    checkIfZero("3")
     updateDisplay()
   })
   $("#4").click(function() {
-    currentNumber += "4"
+    checkIfZero("4")
     updateDisplay()
   })
   $("#5").click(function() {
-    currentNumber += "5"
+    checkIfZero("5")
     updateDisplay()
   })
   $("#6").click(function() {
-    currentNumber += "6"
+    checkIfZero("6")
     updateDisplay()
   })
   $("#7").click(function() {
-    currentNumber += "7"
+    checkIfZero("7")
     updateDisplay()
   })
   $("#8").click(function() {
-    currentNumber += "8"
+    checkIfZero("8")
     updateDisplay()
   })
   $("#9").click(function() {
-    currentNumber += "9"
+    checkIfZero("9")
     updateDisplay()
   })
   $("#0").click(function() {
-    currentNumber += "0"
+    checkIfZero("0")
     updateDisplay()
   })
   $("#dot").click(function() {
@@ -59,27 +71,65 @@ $(document).ready(function() {
     } else if (operator === "*"){
       currentNumber = parseFloat(storedNumber) * parseFloat(currentNumber)
     }
-    updateDisplay();
+    $("#display").replaceWith(`<h3 id="display">${currentNumber}<h3>`)
     storedNumber = currentNumber;
-    currentNumber = "";
-
+    currentNumber = ""
+    operator = ""
   })
   //--------------------business logic-----------------------
+
+  $("#clear").click(function() {
+    storedNumber = 0
+    currentNumber = 0
+    updateDisplay()
+  })
   $("#addition").click(function() {
-    if (storedNumber === "") {
+    if (storedNumber === 0) {
       storedNumber = currentNumber;
-      currentNumber += " +"
-      updateDisplay()
-      currentNumber= ""
-      operator = "+"
+      currentNumber = ""
     } else {
       storedNumber = parseFloat(currentNumber) + parseFloat(storedNumber) 
-      currentNumber = `${storedNumber} +`;
-      updateDisplay()
-      currentNumber= ""
-      operator = "+"
+      currentNumber = ""
     }
-    
+    operator = "+"
+    updateDisplay()
+    currentNumber= 0
+  }) 
+  $("#subtraction").click(function() {
+    if (storedNumber === 0) {
+      storedNumber = currentNumber;
+      currentNumber = ""
+    } else {
+      storedNumber = parseFloat(storedNumber) - parseFloat(currentNumber) 
+      currentNumber = ""
+    }
+    updateDisplay()
+    currentNumber= 0
+    operator = "-"
+  }) 
+  $("#multiply").click(function() {
+    if (storedNumber === 0) {
+      storedNumber = currentNumber;
+      currentNumber = ""
+    } else {
+      storedNumber = parseFloat(currentNumber) * parseFloat(storedNumber) 
+      currentNumber = "";
+    }
+    updateDisplay()
+    currentNumber= 0
+    operator = "*"
+  }) 
+  $("#divide").click(function() {
+    if (storedNumber === 0) {
+      storedNumber = currentNumber;
+      currentNumber = ""
+    } else {
+      storedNumber = parseFloat(storedNumber) / parseFloat(currentNumber) 
+      currentNumber = "";
+    }
+    updateDisplay()
+    currentNumber= 0
+    operator = "/"
   }) 
   
 });
