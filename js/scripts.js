@@ -1,9 +1,13 @@
 $(document).ready(function() {
-  let currentNumber = 0
-  let storedNumber = 0
-  let operator = ""
-  let EqualsCheck = false 
+  let currentNumber = 0;
+  let storedNumber = 0;
+  let operator = "";
+  let equalsToken = false;
   let checkIfZero = function(value){
+    if (equalsToken === true){
+      storedNumber = 0;
+      equalsToken = false;
+    }
     if (currentNumber === 0 || currentNumber === ""){
       currentNumber = value;
     } else {
@@ -58,6 +62,9 @@ $(document).ready(function() {
     updateDisplay()
   })
   $("#dot").click(function() {
+    if (equalsToken === true){
+      clearNumbers();
+    }
     currentNumber += "."
     updateDisplay()
   })
@@ -75,18 +82,23 @@ $(document).ready(function() {
     storedNumber = currentNumber;
     currentNumber = ""
     operator = ""
+    equalsToken = true;
   })
   //--------------------business logic-----------------------
-
+  let clearNumbers = function(){
+    storedNumber = 0;
+    currentNumber = 0;
+  }
   $("#clear").click(function() {
-    storedNumber = 0
-    currentNumber = 0
+    clearNumbers()
     updateDisplay()
   })
   $("#addition").click(function() {
     if (storedNumber === 0) {
       storedNumber = currentNumber;
       currentNumber = ""
+    } else if (equalsToken === true){
+      equalsToken = false;
     } else {
       storedNumber = parseFloat(currentNumber) + parseFloat(storedNumber) 
       currentNumber = ""
@@ -99,38 +111,43 @@ $(document).ready(function() {
     if (storedNumber === 0) {
       storedNumber = currentNumber;
       currentNumber = ""
+    } else if (equalsToken === true){
+      equalsToken = false;
     } else {
       storedNumber = parseFloat(storedNumber) - parseFloat(currentNumber) 
       currentNumber = ""
     }
+    operator = "-"
     updateDisplay()
     currentNumber= 0
-    operator = "-"
   }) 
   $("#multiply").click(function() {
     if (storedNumber === 0) {
       storedNumber = currentNumber;
       currentNumber = ""
+    } else if (equalsToken === true){
+      equalsToken = false;
     } else {
       storedNumber = parseFloat(currentNumber) * parseFloat(storedNumber) 
       currentNumber = "";
     }
-    updateDisplay()
-    currentNumber= 0
     operator = "*"
+    updateDisplay()
+    currentNumber= ""
   }) 
   $("#divide").click(function() {
     if (storedNumber === 0) {
       storedNumber = currentNumber;
       currentNumber = ""
+    } else if (equalsToken === true){
+      equalsToken = false;
     } else {
       storedNumber = parseFloat(storedNumber) / parseFloat(currentNumber) 
       currentNumber = "";
     }
+    operator = "/"
     updateDisplay()
     currentNumber= 0
-    operator = "/"
   }) 
-  
 });
   
